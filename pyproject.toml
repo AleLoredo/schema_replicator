@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "schema-replicator"
+version = "0.1.0"
+description = "Herramienta de replicación de esquemas que desacopla la estructura de la integridad para permitir cargas de datos de alto rendimiento."
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+  { name = "Alejandro Loredo", email = "alejandro@example.com" },
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+dependencies = [
+  "SQLAlchemy>=1.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/AleLoredo/schema_replicator"
+Issues = "https://github.com/AleLoredo/schema_replicator/issues"
