@@ -2,6 +2,8 @@
 
 **Schema Replicator** is a specialized module designed to handle the intelligent replication of database schemas. Unlike standard dump utilities, it is designed to split the DDL (Data Definition Language) generation into logical phases to support high-performance data loading pipelines.
 
+This library will allow you to clone a DB structure into another DB. Then use can another tool to migrate the data from one DB to another being able to run multiple paralel batches while not having to worry about the order of the data. Finally, with just one command, this library will apply the integrity restrictions on the target DB (Foreign Keys, Constraints) once you are done loading the data. 
+
 ## 🧠 Core Philosophy
 
 Relational databases have strict integrity rules (Foreign Keys, Constraints) that make simple data copying difficult (the "Chicken and Egg" problem).
