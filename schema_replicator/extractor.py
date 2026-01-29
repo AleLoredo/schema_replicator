@@ -1,6 +1,6 @@
 from typing import List, Tuple, Any
 from sqlalchemy.engine import Engine
-from sqlalchemy import inspect, MetaData, Table
+from sqlalchemy import inspect, MetaData, Table, Column
 from sqlalchemy.schema import CreateTable, CreateIndex, AddConstraint
 from sqlalchemy.ext.compiler import compiles
 
@@ -42,9 +42,23 @@ class DDLExtractor:
             # Let's keep PK definition in the column but ensure no ForeignKeyConstraints are added at table level.
             
             # Note: col.copy() preserves everything.
-            new_col = col.copy()
+            # new_col = col.copy()
             # Strip foreign keys from the column definition if any (inline FKs)
-            new_col.foreign_keys = set()
+            
+            # Since .copy() is deprecated, we construct a new Column with the desired attributes
+            # We explicitly do NOT include foreign_keys.
+            new_col = Column(
+                col.name,
+                col.type,
+                nullable=col.nullable,
+                primary_key=col.primary_key,
+                autoincrement=col.autoincrement,
+                default=col.default,
+                server_default=col.server_default,
+                comment=col.comment,
+                # explicitly omit foreign_keys
+            )
+            
             clean_table.append_column(new_col)
             
         # Compile
