@@ -74,7 +74,12 @@ class DDLExtractor:
         ddl_statements = []
 
         # 1. Indexes
+        seen_indexes = set()
         for index in table.indexes:
+            if index.name in seen_indexes:
+                continue
+            seen_indexes.add(index.name)
+            
             # CreateIndex
             stmt = CreateIndex(index).compile(self.engine)
             ddl_statements.append(str(stmt) + ";")
